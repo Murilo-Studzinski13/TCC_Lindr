@@ -1,0 +1,25 @@
+<?php
+require_once __DIR__.'/config/database.php';
+require_once __DIR__.'/includes/app_helpers.php';
+$me=require_login();
+ob_start();
+
+if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$action=$_POST['action']??'';
+ if($action==='preferences'){$enabled=isset($_POST['discover_enabled'])?1:0;$email=isset($_POST['notificacoes_email'])?1:0;$pdo->prepare('UPDATE usuarios SET discover_enabled=?,notificacoes_email=? WHERE id=?')->execute([$enabled,$email,$me['id']]);flash('Preferências atualizadas.');redirect('configuracoes.php');}
+ if($action==='password'){$current=$_POST['senha_atual']??'';$new=$_POST['senha_nova']??'';$confirm=$_POST['confirmar']??'';if(!password_verify($current,$me['senha_hash'])){flash('A senha atual não confere.','error');redirect('configuracoes.php');}if(password_error($new)||$new!==$confirm){flash(password_error($new)??'A confirmação não confere com a nova senha.','error');redirect('configuracoes.php');}$hash=password_hash($new,PASSWORD_DEFAULT);$pdo->prepare('UPDATE usuarios SET senha_hash=? WHERE id=?')->execute([$hash,$me['id']]);session_regenerate_id(true);flash('Senha alterada com sucesso.');redirect('configuracoes.php');}
+ if($action==='delete_request'){$confirm=trim($_POST['confirmacao']??'');if($confirm!=='EXCLUIR'){flash('Digite EXCLUIR para confirmar.','error');redirect('configuracoes.php');}$pdo->prepare('UPDATE usuarios SET ativo=0,discover_enabled=0 WHERE id=?')->execute([$me['id']]);session_destroy();header('Location: index.php');exit;}}
+$me=user();
+?>
+<h1>Configurações</h1><p class="mut">Você decide como usar o Lindr e quais informações compartilhar.</p>
+<form class="card" method="post"><?=csrf_field()?><input type="hidden" name="action" value="preferences"><h2>Descoberta e notificações</h2><label class="checkbox-line"><input type="checkbox" name="discover_enabled" value="1" <?=((int)($me['discover_enabled']??1)===1)?'checked':''?>> Mostrar meu perfil na descoberta e nas buscas</label><p class="mut">Ao pausar, seu perfil deixa de aparecer para novas pessoas. Isso não apaga conversas existentes.</p><label class="checkbox-line"><input type="checkbox" name="notificacoes_email" value="1" <?=((int)($me['notificacoes_email']??0)===1)?'checked':''?>> Aceito receber notificações por e-mail quando esse recurso estiver disponível</label><div class="actions"><button class="btn">Salvar preferências</button></div></form>
+<form class="card" method="post"><?=csrf_field()?><input type="hidden" name="action" value="password"><h2>Alterar senha</h2><label>Senha atual</label><input type="password" name="senha_atual" autocomplete="current-password" required><div class="field-row"><div><label>Nova senha</label><input type="password" name="senha_nova" minlength="10" autocomplete="new-password" required></div><div><label>Confirmar nova senha</label><input type="password" name="confirmar" minlength="10" autocomplete="new-password" required></div></div><p class="mut">Use pelo menos 10 caracteres, incluindo letras e números.</p><button class="btn">Atualizar senha</button></form>
+<section class="card" id="duas-etapas"><h2>Verificação em duas etapas</h2><p class="mut">Uma segunda camada de proteção: além da senha, o login pede um código do seu aplicativo autenticador.</p><p><b>Status:</b> <?=!empty($me['totp_ativo'])?'<span class="pill">Ativada</span>':'<span class="mut">Desativada</span>'?></p><div class="actions"><a class="btn secondary" href="dois_fatores.php"><?=!empty($me['totp_ativo'])?'Gerenciar':'Ativar verificação em duas etapas'?></a></div></section>
+<section class="card"><h2>Seus dados e sua conta</h2><p>Você pode revisar seu perfil, seus interesses e as informações que decidiu compartilhar.</p><div class="actions"><a class="btn secondary" href="perfil.php">Editar meu perfil</a><a class="btn secondary" href="fotos.php">Gerenciar fotos</a><a class="btn secondary" href="privacidade.php">Política de privacidade</a></div></section>
+<form class="card" method="post" onsubmit="return confirm('Esta ação desativará sua conta imediatamente. Deseja continuar?')"><?=csrf_field()?><input type="hidden" name="action" value="delete_request"><h2>Desativar conta</h2><p class="mut">Sua conta ficará desativada e deixará de aparecer na descoberta. Para exclusão definitiva dos dados, disponibilize um processo de atendimento e validação antes do lançamento público.</p><label>Digite EXCLUIR para confirmar</label><input name="confirmacao" required placeholder="EXCLUIR"><div class="actions"><button class="btn danger">Desativar minha conta</button></div></form>
+
+<?php
+$content=ob_get_clean();
+$page='configuracoes'; $title='Configurações — Lindr'; require __DIR__.'/includes/header.php'; require __DIR__.'/includes/navbar.php'; ?>
+<div class="pg"><main class="wrap">
+<?= $content ?>
+</main></div><?php require __DIR__.'/includes/footer.php'; ?>
