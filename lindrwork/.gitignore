@@ -1,0 +1,20 @@
+# Segredos e configuração local (nunca suba para o GitHub)
+.env
+config/mail.local.php
+
+# Fotos enviadas pelos usuários (dados pessoais): só a pasta é versionada
+uploads/fotos/*
+!uploads/fotos/.gitkeep
+
+# Logs e arquivos temporários do servidor
+storage/*.log
+storage/rate_limit/
+*.log
+
+# Dependências e arquivos do sistema/editor
+vendor/
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

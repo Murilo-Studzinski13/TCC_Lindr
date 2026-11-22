@@ -1,0 +1,7 @@
+# Segurança: arquivos que nunca devem ser baixados pelo navegador
+# (dumps do banco com hashes de senha, documentação, chaves e configuração).
+# As pastas storage/ e demo/ têm o próprio .htaccess bloqueando tudo.
+Options -Indexes
+<FilesMatch "(\.(sql|md|json|lock|example|log|key|txt)$|^\.env)">
+    Require all denied
+</FilesMatch>

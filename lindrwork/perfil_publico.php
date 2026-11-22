@@ -1,0 +1,86 @@
+<?php
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/app_helpers.php';
+$me = require_login();
+ob_start();
+
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+if (!$id || $id === (int)$me['id']) redirect('perfil.php');
+$s = $pdo->prepare("SELECT u.id,u.nome,u.nome_social,u.foto_url,u.bio,u.cidade,u.estado,u.pronomes,u.identidade_genero,u.orientacao,u.visibilidade_identidade,u.procurando,u.discover_enabled FROM usuarios u WHERE u.id=? AND u.ativo=1");
+$s->execute([$id]);
+$person = $s->fetch();
+$m = $pdo->prepare('SELECT 1 FROM matches WHERE status="match" AND ((usuario1_id=? AND usuario2_id=?) OR (usuario1_id=? AND usuario2_id=?)) LIMIT 1');
+$m->execute([$me['id'], $id, $id, $me['id']]);
+$isMatch = (bool)$m->fetchColumn();
+if (!$person || (!(int)$person['discover_enabled'] && !$isMatch)) {
+    http_response_code(404);
+    exit('Perfil não encontrado.');
+}
+$b = $pdo->prepare('SELECT 1 FROM bloqueios WHERE (usuario_id=? AND bloqueado_id=?) OR (usuario_id=? AND bloqueado_id=?)');
+$b->execute([$me['id'], $id, $id, $me['id']]);
+if ($b->fetchColumn()) {
+    http_response_code(403);
+    exit('Este perfil não está disponível.');
+}
+$s = $pdo->prepare('SELECT foto_url FROM fotos WHERE usuario_id=? ORDER BY principal DESC,ordem,id');
+$s->execute([$id]);
+$photos = $s->fetchAll(PDO::FETCH_COLUMN);
+$s = $pdo->prepare("SELECT id,conteudo,imagem_url,data_publicacao FROM publicacoes WHERE usuario_id=? AND imagem_url IS NOT NULL AND imagem_url<>'' ORDER BY data_publicacao DESC LIMIT 60");
+$s->execute([$id]);
+$postPhotos = $s->fetchAll();
+$s = $pdo->prepare('SELECT i.nome FROM interesses i JOIN usuario_interesses ui ON ui.interesse_id=i.id WHERE ui.usuario_id=? ORDER BY i.nome');
+$s->execute([$id]);
+$interests = $s->fetchAll(PDO::FETCH_COLUMN);
+?>
+<div class="card">
+    <div class="person"><?= avatar($person) ?>
+        <div>
+            <h1 style="margin:0"><?= e(display_name($person)) ?></h1>
+            <p class="mut"><?= e(trim(($person['cidade'] ?? '') . (!empty($person['estado'])?', ' . $person['estado']:''))) ?> <?= e($person['pronomes'] ?? '') ?></p>
+        </div>
+    </div>
+    <p class="post-content"><?= e($person['bio']?:'Ainda não escreveu uma bio.') ?></p>
+    <?php
+    if ($person['visibilidade_identidade'] === 'publico' || ($person['visibilidade_identidade'] === 'amigos' && $isMatch)):
+        ?>
+        <p><?= e($person['identidade_genero'] ?? '') ?> <?= e($person['orientacao'] ?? '') ?></p>
+    <?php endif; ?>
+    <?php if ($interests): ?>
+        <h3>Interesses</h3>
+        <div class="row">
+            <?php foreach ($interests as $i): ?>
+                <span class="pill"><?= e($i) ?></span>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    <div class="actions"><a class="btn" href="descobrir.php">Voltar para descobrir</a><a class="btn secondary" href="denunciar.php?usuario_id=<?=$person['id']?>">Denunciar perfil</a>
+        <form method="post" action="bloquear.php" onsubmit="return confirm('Bloquear esta pessoa?')"><?= csrf_field() ?><input type="hidden" name="target_id" value="<?=$person['id']?>"><button class="btn danger" type="submit">Bloquear</button></form>
+    </div>
+</div>
+<?php if ($photos): ?>
+    <h2>Fotos</h2>
+    <div class="grid">
+        <?php foreach ($photos as $url): ?>
+            <img class="thumb" src="<?=e($url)?>" alt="Foto de <?=e(display_name($person))?>">
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+<?php if ($postPhotos): ?>
+    <h2>Publicações com foto</h2>
+    <div class="gallery">
+        <?php foreach ($postPhotos as $pf): ?>
+            <div class="g-item"><a href="<?=e($pf['imagem_url'])?>" target="_blank" rel="noopener"><img src="<?=e($pf['imagem_url'])?>" alt="<?=e(mb_strimwidth($pf['conteudo']?:'Publicação com foto',0,80,'…'))?>" loading="lazy"></a><span class="tag"><?= e(date('d/m/Y', strtotime($pf['data_publicacao']))) ?></span></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+<?php
+$content = ob_get_clean();
+$page = 'perfil_publico';
+$title = 'Perfil público — Lindr';
+require __DIR__ . '/includes/header.php';
+require __DIR__ . '/includes/navbar.php';
+?>
+<div class="pg">
+    <main class="wrap"> <?= $content ?> </main>
+</div>
+<?php require __DIR__ . '/includes/footer.php'; ?>

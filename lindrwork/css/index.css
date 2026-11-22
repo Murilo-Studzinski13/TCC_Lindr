@@ -1,0 +1,436 @@
+/* Estilos específicos de index.php.
+   O CSS base (navbar, botões, cartões...) vem de base.css: não repita regras dele aqui,
+   senão elas sobrescrevem o base.css (foi isso que quebrava a navbar). */
+:root {
+    --bg: #f6f3fc;
+    --card: #fff;
+    --ink: #1b1533;
+    --mut: #6d6888;
+    --pri: #6b46d9;
+    --pri2: #c04fd0;
+    --line: #e5e0f4;
+    --chip: #eee8fd;
+    --nav: #1a0b2e;
+    --navy: #060b2a;
+    --rb: linear-gradient(90deg,#ff4d6d,#ff9a3c,#ffd93d,#4cd07d,#3db5ff,#8b5cf6);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: Inter,system-ui,sans-serif;
+}
+
+.lead {
+    color: var(--mut);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0;
+}
+
+.ab:hover {
+    background: var(--chip);
+}
+
+.ab.on svg {
+    fill: currentColor;
+}
+
+.tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 10px max(16px,4vw);
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+}
+
+.sq.g {
+    background: #4caf7d;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 0;
+    align-items: stretch;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 66px);
+}
+
+.hl {
+    background: var(--card);
+    padding: 60px max(24px,5vw) 60px max(24px,7vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hr {
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+    padding: 60px 20px;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: clamp(44px,5.3vw,80px);
+    line-height: .98;
+    letter-spacing: -.05em;
+    margin: 0 0 30px;
+}
+
+.hl h1 {
+    max-width: 7.4em;
+}
+
+em {
+    font-style: normal;
+    background: linear-gradient(90deg,var(--pri),var(--pri2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.bl {
+    display: flex;
+    gap: 22px;
+    margin-top: 38px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--mut);
+}
+
+.dt {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3cc07a;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.pw {
+    position: relative;
+    width: 310px;
+}
+
+.phone {
+    background: var(--card);
+    border-radius: 34px;
+    padding: 22px;
+    box-shadow: 0 30px 70px #6c47d938;
+    transform: rotate(4deg);
+}
+
+.pimg2 {
+    height: 310px;
+    border-radius: 24px;
+    margin: 14px 0;
+    background: linear-gradient(135deg,#5a3d8a,#f4a3b8 60%,#ffd27f);
+}
+
+.pb {
+    flex: 1;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--pri);
+}
+
+.fl {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: absolute;
+    background: var(--card);
+    border: 0;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 13px;
+    box-shadow: 0 18px 40px #6c47d92e;
+    white-space: nowrap;
+}
+
+.fl b {
+    display: block;
+    font-size: 14px;
+}
+
+.fl small {
+    color: var(--mut);
+    font-size: 11px;
+}
+
+.fl.a {
+    left: -95px;
+    top: 82px;
+}
+
+.fl.b {
+    right: -75px;
+    bottom: 60px;
+}
+
+.feat {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px max(18px,5vw) 60px;
+}
+
+.feat h2 {
+    font-size: 34px;
+    margin-bottom: 18px;
+}
+
+.auth .l {
+    background: radial-gradient(circle at 78% 12%,#2c2470 0,#050b2b 42%);
+    color: #fff;
+    padding: 60px max(24px,4vw) 60px max(24px,8vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+}
+
+.ac input {
+    height: 52px;
+}
+
+.ac label {
+    margin: 20px 0 8px;
+    font-size: 12.5px;
+}
+
+.btn.wide {
+    width: 100%;
+    height: 52px;
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 24px #6c47d940;
+}
+
+.btn.wide.ghost {
+    box-shadow: none;
+    margin-top: 0;
+}
+
+.or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--mut);
+    font-size: 11px;
+    margin: 16px 0;
+}
+
+.c {
+    text-align: center;
+}
+
+.lk,
+.lk2 {
+    color: var(--pri);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.bk {
+    font-size: 12.5px;
+    color: var(--mut);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.fine {
+    font-size: 11px;
+    color: var(--mut);
+    text-align: center;
+    margin: 12px 0 0;
+}
+
+.feed-page {
+    max-width: 760px;
+}
+
+.feed-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.feed-head h2 {
+    font-size: 32px;
+}
+
+.composer {
+    margin-bottom: 18px;
+}
+
+.composer textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.composer-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr auto;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.feed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post {
+    padding: 20px;
+}
+
+.post-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.author-info {
+    gap: 12px;
+}
+
+.avatar-photo {
+    object-fit: cover;
+}
+
+.post-theme {
+    margin-top: 12px;
+}
+
+.post-text {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 14px 0;
+}
+
+.post-photo {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    margin: 12px 0;
+}
+
+.post-actions {
+    display: flex;
+    gap: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+}
+
+.post-actions form {
+    margin: 0;
+}
+
+.comments {
+    margin-top: 8px;
+}
+
+.comment {
+    display: flex;
+    gap: 9px;
+    padding: 9px 0;
+}
+
+.comment-body {
+    display: flex;
+    flex-direction: column;
+    background: var(--chip);
+    border-radius: 13px;
+    padding: 8px 11px;
+    min-width: 0;
+}
+
+.comment-body strong {
+    font-size: 12px;
+}
+
+.comment-body span {
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.comment-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.empty-feed {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+@media (max-width:800px) {
+    .hero,
+    .auth,
+    .chat,
+    .two {
+        grid-template-columns: 1fr;
+    }
+    .hl {
+        padding: 40px 22px;
+    }
+    .hero {
+        min-height: auto;
+    }
+    .pw {
+        width: 270px;
+    }
+    .fl.a {
+        left: -14px;
+    }
+    .fl.b {
+        right: -14px;
+    }
+    .auth .l {
+        padding: 40px 22px;
+    }
+    .wrap {
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width:700px) {
+    .composer-bottom {
+        grid-template-columns: 1fr;
+    }
+    .post-top {
+        align-items: flex-start;
+    }
+    .feed-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}

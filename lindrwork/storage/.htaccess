@@ -1,0 +1,2 @@
+# Contém a chave que protege os segredos do 2FA: nunca servir pelo navegador.
+Require all denied

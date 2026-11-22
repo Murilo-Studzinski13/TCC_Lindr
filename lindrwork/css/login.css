@@ -1,0 +1,91 @@
+/* Estilos específicos de login.php.
+   O CSS base (navbar, botões, cartões...) vem de base.css: não repita regras dele aqui,
+   senão elas sobrescrevem o base.css (foi isso que quebrava a navbar). */
+.auth .l h1 {
+    color: #fff;
+    font-size: clamp(42px,4.6vw,68px);
+    max-width: 8em;
+    line-height: 1.08;
+    margin-bottom: 20px;
+}
+
+.auth .r {
+    min-width: 0;
+}
+
+.auth .ac {
+    width: 100%;
+    max-width: 474px;
+    overflow: hidden;
+}
+
+.password-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.password-label label {
+    margin: 12px 0 5px;
+}
+
+.forgot-link {
+    color: var(--pri);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
+    margin-top: 8px;
+}
+
+.ac .or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--mut);
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+.ac .or:before,
+.ac .or:after {
+    content: "";
+    height: 1px;
+    background: var(--line);
+    flex: 1;
+}
+
+.ac .signup-button {
+    margin-top: 14px;
+    display: flex;
+    color: var(--pri)!important;
+    border-color: var(--line);
+    background: var(--card);
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.ac .signup-button:hover {
+    background: var(--chip);
+    border-color: var(--pri);
+}
+
+.ac .signup-note {
+    text-align: center;
+    margin: 18px 0 0;
+}
+
+@media (max-width:800px) {
+    .auth .r {
+        padding: 22px 16px 34px;
+    }
+    .auth .ac {
+        padding: 28px 24px;
+    }
+    .auth .l h1 {
+        font-size: clamp(36px,9vw,54px);
+    }
+}
