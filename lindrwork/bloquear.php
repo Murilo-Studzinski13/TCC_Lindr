@@ -1,6 +1,11 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/includes/app_helpers.php';
+=======
+require_once __DIR__.'/config/database.php';
+require_once __DIR__.'/includes/app_helpers.php';
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 $me = require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect('perfil.php');
@@ -26,8 +31,12 @@ if ($action === 'unblock') {
     redirect('perfil.php#seguranca');
 }
 
+<<<<<<< HEAD
 $pdo->prepare('INSERT IGNORE INTO bloqueios(usuario_id,bloqueado_id) VALUES(?,?)')
     ->execute([$me['id'], $target]);
+=======
+$pdo->prepare('INSERT IGNORE INTO bloqueios(usuario_id,bloqueado_id) VALUES(?,?)')->execute([$me['id'], $target]);
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 // Encerra amizade/pedidos pendentes entre as duas pessoas (o chat deixa de abrir).
 $pdo->prepare('UPDATE matches SET status="bloqueado", bloqueado_por=? WHERE (usuario1_id=? AND usuario2_id=?) OR (usuario1_id=? AND usuario2_id=?)')
     ->execute([$me['id'], $me['id'], $target, $target, $me['id']]);

@@ -24,6 +24,7 @@ Dê permissão de escrita à pasta `uploads/` (e `storage/`).
 - Quem ainda não tem autenticador configura na hora (QR Code), recebe os códigos de backup e só então entra.
 - Não dá mais para desativar o 2FA em Configurações. Para testes locais: `LINDR_2FA_OBRIGATORIO=0`.
 - Contas da demo (seed) vão configurar o autenticador no primeiro login.
+<<<<<<< HEAD
 
 ## Rodada 2
 - **Feed:** o formulário de publicar agora tem **foto do aparelho** (arquivo), igual ao perfil; dá para postar só a foto. Cada publicação própria tem botão **Excluir**.
@@ -79,3 +80,5 @@ Para ter **todas** as cidades do IBGE (hoje há uma lista resumida embutida), ro
 
 ### 7. Painel ADM no celular e no tablet (falha CT79 do checklist)
 - Em telas de até 900px o menu do ADM agora fica fixo na parte de baixo, como no site (5 botões em grade), com espaço no fim da página para não cobrir o conteúdo. Tabelas continuam rolando para o lado dentro do próprio quadro.
+=======
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373

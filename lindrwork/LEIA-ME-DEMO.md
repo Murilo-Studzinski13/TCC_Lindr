@@ -10,7 +10,11 @@ Importe **`seed_demo.sql`** no phpMyAdmin (banco `lindr` selecionado, depois de 
 |---|---|---|
 | **Administrador** (painel `admin/`) | `admin@lindr.com` | `Admin@Lindr2026` |
 | **Usuária principal** (Duda, perfil mais completo) | `usuario@lindr.com` | `Usuario@2026` |
+<<<<<<< HEAD
 | Aline Dias | `seguranca@lindr.demo` | `Seguranca@2026` |
+=======
+| **Conta com verificação em duas etapas** (Aline Dias) | `seguranca@lindr.demo` | `Seguranca@2026` + código do aplicativo |
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 | Conta suspensa por spam (aparece no admin) | `promo.seguidores@lindr.demo` | `Demo@Lindr2026` (não consegue entrar) |
 
 ## Os 30 usuários de demonstração
@@ -74,12 +78,26 @@ Todos usam a senha **`Demo@Lindr2026`**.
 **2. Como administrador (`admin@lindr.com`)**
 - *Painel administrativo* (menu do topo): painel geral, **Denúncias** (remover post, suspender usuário), Usuários, Grupos e Publicações. A conta suspensa por spam aparece como inativa.
 
+<<<<<<< HEAD
 **3. Verificação em duas etapas (por e-mail)**
 1. Entre com qualquer conta em um navegador novo: depois da senha o site pede um código de 6 dígitos enviado por e-mail.
 2. Nas contas de demonstração (`@lindr.demo` e `@lindr.com`), em localhost, o código aparece na própria tela (esses e-mails não existem). Com sua conta real, o código chega pelo Gmail configurado.
 3. Marque *Confiar neste dispositivo por 30 dias* para não pedir de novo no mesmo navegador. Veja e remova aparelhos em *Configurações → Dispositivos confiáveis*.
 
 > **Produção:** troque o e-mail do administrador (`admin@lindr.com`) por um e-mail real, senão o código da verificação em duas etapas só aparece na tela em localhost.
+=======
+**3. Verificação em duas etapas**
+1. Instale um aplicativo autenticador no celular (Google Authenticator, Microsoft Authenticator, Authy...).
+2. Adicione a conta escaneando o QR Code do arquivo **`demo/qrcode-2fa-aline-dias.png`** (ou digite a chave `LZOHI5H55RS744QSS43XEIWXFA5LLI4D`).
+3. Em `login.php`, entre com `seguranca@lindr.demo` / `Seguranca@2026`: aparece a tela **"Digite o código"**. Digite o código de 6 dígitos do aplicativo.
+4. **Sem o celular?** Use um código de backup (uso único): `rvc4y-shhev`, `gavsr-gnti2`, `cwjer-7g4ka`, `4qnyf-yl6ez`, `utmgl-hca6q`, `rakh7-yh7z3`, `z4vwd-dxs3j`, `s7zar-7w6ki`
+5. Errar o código **5 vezes** bloqueia a conta por 15 minutos.
+6. Para mostrar a ativação do zero: entre como a Duda → *Configurações → Verificação em duas etapas → Ativar*.
+
+> **Relógio:** o código depende da hora do computador onde o site roda. Se os códigos nunca baterem, sincronize o relógio do Windows (Configurações → Hora e idioma → Sincronizar agora).
+>
+> **Chave do 2FA:** `storage/app.key` é a chave de **demonstração** que protege os segredos no banco. Ela vem junto para a conta Aline Dias funcionar. Em produção, apague esse arquivo (o sistema cria um novo) e use contas próprias.
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 
 ## "Esqueci minha senha" sem e-mail configurado
 Rodando em `localhost` e sem SMTP, a tela mostra o **link de redefinição na própria página**, para dar para demonstrar o fluxo.

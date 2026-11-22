@@ -58,6 +58,10 @@ textarea {
 /* =========================================================
    CABEÇALHO — MESMA IDENTIDADE VISUAL DO SITE
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .admin-top {
     position: sticky;
     top: 0;
@@ -133,6 +137,10 @@ textarea {
 /* =========================================================
    ESTRUTURA
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .admin-layout {
     display: grid;
     grid-template-columns: 236px minmax(0, 1fr);
@@ -217,6 +225,10 @@ textarea {
 /* =========================================================
    TEXTOS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 h1,
 h2,
 h3,
@@ -252,6 +264,10 @@ h3 {
 /* =========================================================
    CARDS / ESTATÍSTICAS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -342,6 +358,10 @@ h3 {
 /* =========================================================
    ATALHOS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .quick {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -368,6 +388,10 @@ h3 {
 /* =========================================================
    BOTÕES
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .btn {
     min-height: 42px;
     display: inline-flex;
@@ -415,6 +439,10 @@ h3 {
 /* =========================================================
    FORMULÁRIOS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .filters {
     display: flex;
     flex-wrap: wrap;
@@ -505,6 +533,10 @@ textarea:focus {
 /* =========================================================
    TABELAS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .table-wrap {
     width: 100%;
     overflow-x: auto;
@@ -572,6 +604,10 @@ td small {
 /* =========================================================
    BADGES / AVISOS
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 .badge {
     display: inline-flex;
     align-items: center;
@@ -615,10 +651,18 @@ td small {
 /* =========================================================
    RESPONSIVO — MESMA LÓGICA DO SITE
    ========================================================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 @media (max-width: 900px) {
     .admin-layout {
         grid-template-columns: 1fr;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .admin-sidebar {
         position: static;
         height: auto;
@@ -626,21 +670,41 @@ td small {
         border-right: 0;
         border-bottom: 1px solid var(--line);
     }
+<<<<<<< HEAD
     .sidebar-title {
         display: none;
     }
+=======
+
+    .sidebar-title {
+        display: none;
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .sidebar-nav {
         flex-direction: row;
         gap: 6px;
         overflow-x: auto;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .sidebar-nav a {
         flex: 0 0 auto;
         white-space: nowrap;
     }
+<<<<<<< HEAD
     .sidebar-bottom {
         display: none;
     }
+=======
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .admin-main {
         padding: 30px 22px 50px;
     }
@@ -652,44 +716,85 @@ td small {
         height: auto;
         padding: 10px 18px;
     }
+<<<<<<< HEAD
     .admin-logo {
         font-size: 25px;
     }
     .admin-top-right {
         gap: 4px;
     }
+=======
+
+    .admin-logo {
+        font-size: 25px;
+    }
+
+    .admin-top-right {
+        gap: 4px;
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .admin-user,
     .admin-top-link {
         display: none;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .admin-top-button {
         min-height: 34px;
         padding: 7px 12px;
         font-size: 12px;
     }
+<<<<<<< HEAD
     .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+=======
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .quick,
     .form-grid {
         grid-template-columns: 1fr;
     }
+<<<<<<< HEAD
     .admin-main {
         padding: 24px 14px 40px;
     }
+=======
+
+    .admin-main {
+        padding: 24px 14px 40px;
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     .card {
         padding: 18px;
         border-radius: 17px;
     }
+<<<<<<< HEAD
     .section-head {
         align-items: flex-start;
     }
+=======
+
+    .section-head {
+        align-items: flex-start;
+    }
+
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     h1 {
         font-size: 32px;
     }
 }
 
 /* ===== Detalhe de denúncia: prova da conversa ===== */
+<<<<<<< HEAD
 .evid {
     display: flex;
     flex-direction: column;
@@ -788,3 +893,10 @@ td small {
         gap: 10px;
     }
 }
+=======
+.evid{display:flex;flex-direction:column;gap:8px;max-height:460px;overflow-y:auto;padding:12px;background:#f6f3fc;border-radius:12px}
+.evid-msg{max-width:78%;padding:8px 12px;border-radius:14px;background:#fff;border:1px solid #e5e0f4;overflow-wrap:anywhere}
+.evid-msg small{display:block;color:#6d6888;margin-bottom:2px}
+.evid-msg.a{align-self:flex-end;background:#efe9ff}
+.actions-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373

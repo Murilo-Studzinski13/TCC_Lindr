@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 declare(strict_types = 1);
 require_once __DIR__ . '/../config/database.php';
@@ -67,3 +68,9 @@ $flash = get_flash();
     </main>
 </body>
 </html>
+=======
+<?php declare(strict_types=1); require_once __DIR__.'/../config/database.php'; $admin=require_admin();
+if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$id=(int)$_POST['id'];$s=$pdo->prepare('DELETE FROM publicacoes WHERE id=?');$s->execute([$id]);admin_log('excluiu publicação','publicacao',$id);flash('Publicação excluída.','success');redirect('publicacoes.php');}
+$rows=$pdo->query("SELECT p.*,u.nome,u.nome_social,(SELECT COUNT(*) FROM interacoes i WHERE i.publicacao_id=p.id AND i.tipo='curtida') curtidas,(SELECT COUNT(*) FROM interacoes i WHERE i.publicacao_id=p.id AND i.tipo='comentario') comentarios FROM publicacoes p JOIN usuarios u ON u.id=p.usuario_id ORDER BY p.data_publicacao DESC LIMIT 300")->fetchAll();$flash=get_flash();
+?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Publicações — Lindr</title><link rel="stylesheet" href="css/admin.css"></head><body><?php include __DIR__.'/partials.php'; ?><main class="admin-main"><h1>Publicações</h1><p class="muted">Modere publicações e remova conteúdo que viole as regras da plataforma.</p><?php if($flash):?><div class="flash <?=$flash['type']?>"><?=e($flash['message'])?></div><?php endif;?><section class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Autor</th><th>Conteúdo</th><th>Interações</th><th>Data</th><th></th></tr></thead><tbody><?php foreach($rows as $r):?><tr><td>#<?=$r['id']?></td><td><?=e($r['nome_social']?:$r['nome'])?></td><td><?=e(mb_strimwidth($r['conteudo'],0,160,'…'))?></td><td>♥ <?=$r['curtidas']?> · 💬 <?=$r['comentarios']?></td><td><?=date('d/m/Y H:i',strtotime($r['data_publicacao']))?></td><td><form method="post" onsubmit="return confirm('Excluir esta publicação e suas interações?');"><?php echo csrf_field();?><input type="hidden" name="id" value="<?=$r['id']?>"><button class="btn sm danger">Excluir</button></form></td></tr><?php endforeach;?></tbody></table></div></section></main></body></html>
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373

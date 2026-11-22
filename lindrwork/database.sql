@@ -34,7 +34,10 @@ CREATE TABLE usuarios (
     interesses TEXT NULL,
     preferencias TEXT NULL,
     verificado TINYINT(1) NOT NULL DEFAULT 0,
+<<<<<<< HEAD
     email_confirmado_em DATETIME NULL,
+=======
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     ativo TINYINT(1) NOT NULL DEFAULT 1,
     discover_enabled TINYINT(1) NOT NULL DEFAULT 1,
     notificacoes_email TINYINT(1) NOT NULL DEFAULT 0,
@@ -76,11 +79,18 @@ CREATE TABLE fotos (
 CREATE TABLE codigos_verificacao (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     usuario_id BIGINT UNSIGNED NOT NULL,
+<<<<<<< HEAD
     codigo VARCHAR(64) NOT NULL, -- hash SHA-256 do código de 6 dígitos
     tipo ENUM('email','senha') NOT NULL DEFAULT 'email',
     expira_em DATETIME NOT NULL,
     usado TINYINT(1) NOT NULL DEFAULT 0,
     tentativas TINYINT UNSIGNED NOT NULL DEFAULT 0,
+=======
+    codigo CHAR(6) NOT NULL,
+    tipo ENUM('email','senha') NOT NULL DEFAULT 'email',
+    expira_em DATETIME NOT NULL,
+    usado TINYINT(1) NOT NULL DEFAULT 0,
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     KEY idx_codigo_usuario (usuario_id, tipo, usado),
@@ -91,6 +101,7 @@ CREATE TABLE codigos_verificacao (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
+<<<<<<< HEAD
 -- DISPOSITIVOS CONFIAVEIS (verificação em duas etapas por e-mail: "confiar neste dispositivo")
 -- ============================================================
 CREATE TABLE dispositivos_confiaveis (
@@ -110,6 +121,8 @@ CREATE TABLE dispositivos_confiaveis (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
+=======
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 -- INTERESSES
 -- ============================================================
 CREATE TABLE interesses (
@@ -241,8 +254,11 @@ CREATE TABLE grupos (
     descricao TEXT NULL,
     tema VARCHAR(80) NULL,
     local_evento VARCHAR(255) NULL,
+<<<<<<< HEAD
     cidade VARCHAR(100) NULL,
     estado CHAR(2) NULL,
+=======
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     data_evento DATETIME NULL,
     privada TINYINT(1) NOT NULL DEFAULT 0,
     status ENUM('ativo','cancelado') NOT NULL DEFAULT 'ativo',

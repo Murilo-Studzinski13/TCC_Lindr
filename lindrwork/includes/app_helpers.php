@@ -35,7 +35,11 @@ function mutual_matches(): array {
               )
             ORDER BY COALESCE(m.data_match,m.data_criacao) DESC';
     $s = $pdo->prepare($sql);
+<<<<<<< HEAD
     $s->execute([$u['id'], $u['id'], $u['id'], $u['id'], $u['id']]);
+=======
+    $s->execute([$u['id'],$u['id'],$u['id'],$u['id'],$u['id']]);
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 
     // Um match mútuo pode ter duas linhas (A→B e B→A): mantém só uma por pessoa.
     $unique = [];
@@ -49,7 +53,11 @@ function mutual_matches(): array {
 function find_conversation(int $a, int $b): ?int {
     global $pdo;
     $s = $pdo->prepare('SELECT id FROM matches WHERE status="match" AND ((usuario1_id=? AND usuario2_id=?) OR (usuario1_id=? AND usuario2_id=?)) ORDER BY id LIMIT 1');
+<<<<<<< HEAD
     $s->execute([$a, $b, $b, $a]);
+=======
+    $s->execute([$a,$b,$b,$a]);
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
     $id = $s->fetchColumn();
     return $id ? (int)$id : null;
 }
@@ -60,6 +68,7 @@ function ensure_conversation(int $a, int $b): int {
     return $id;
 }
 
+<<<<<<< HEAD
 /** Registra uma notificação interna. */
 function notify_user(int $userId, string $type, string $title, string $message = '', ?string $link = null, ?int $actorId = null): void {
     global $pdo;
@@ -72,6 +81,22 @@ function notify_user(int $userId, string $type, string $title, string $message =
 /* ---------- Upload de fotos (galeria do perfil) ---------- */
 const FOTO_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
 const FOTO_DIR_REL = 'uploads/fotos';
+=======
+
+/** Registra uma notificação interna. */
+function notify_user(int $userId, string $type, string $title, string $message='', ?string $link=null, ?int $actorId=null): void {
+    global $pdo;
+    $allowed=['curtida','comentario','mensagem','match','convite','sistema'];
+    if (!in_array($type,$allowed,true) || $userId < 1) return;
+    $stmt=$pdo->prepare('INSERT INTO notificacoes (usuario_id,ator_id,tipo,titulo,mensagem,link) VALUES (?,?,?,?,?,?)');
+    $stmt->execute([$userId,$actorId,$type,mb_substr($title,0,160),mb_substr($message,0,500),$link]);
+}
+
+
+/* ---------- Upload de fotos (galeria do perfil) ---------- */
+const FOTO_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+const FOTO_DIR_REL   = 'uploads/fotos';
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 
 /**
  * Valida e salva uma foto enviada pelo formulário.
@@ -84,7 +109,12 @@ function save_uploaded_photo(?array $file): array {
     switch ($file['error']) {
         case UPLOAD_ERR_OK: break;
         case UPLOAD_ERR_NO_FILE: return [null, 'Escolha uma imagem para enviar.'];
+<<<<<<< HEAD
         case UPLOAD_ERR_INI_SIZE: case UPLOAD_ERR_FORM_SIZE: return [null, 'A imagem é grande demais (máximo 5 MB).'];
+=======
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE: return [null, 'A imagem é grande demais (máximo 5 MB).'];
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
         default: return [null, 'Não foi possível enviar a imagem. Tente de novo.'];
     }
     $tmp = (string)($file['tmp_name'] ?? '');
@@ -111,6 +141,7 @@ function save_uploaded_photo(?array $file): array {
                 $exif = @exif_read_data($tmp);
                 $o = (int)($exif['Orientation'] ?? 1);
                 $deg = [3 => 180, 6 => -90, 8 => 90][$o] ?? 0;
+<<<<<<< HEAD
                 if ($deg) {
                     $rot = imagerotate($img, $deg, 0);
                     if ($rot) {
@@ -123,6 +154,11 @@ function save_uploaded_photo(?array $file): array {
                 imagealphablending($img, false);
                 imagesavealpha($img, true);
             }
+=======
+                if ($deg) { $rot = imagerotate($img, $deg, 0); if ($rot) { imagedestroy($img); $img = $rot; } }
+            }
+            if ($ext === 'png' || $ext === 'webp') { imagealphablending($img, false); imagesavealpha($img, true); }
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
             if ($ext === 'jpg') $saved = imagejpeg($img, $dest, 85);
             elseif ($ext === 'png') $saved = imagepng($img, $dest, 6);
             elseif (function_exists('imagewebp')) $saved = imagewebp($img, $dest, 85);

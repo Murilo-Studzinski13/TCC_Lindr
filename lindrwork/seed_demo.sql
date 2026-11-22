@@ -1483,6 +1483,9 @@ INSERT INTO backup_codes_2fa (usuario_id, codigo_hash, usado_em, criado_em) VALU
   (1034, '55712c00d1f8fc5512a665873c8df25879eaa3a067ff26396e203ce3a82b7e09', NULL, DATE_SUB(NOW(), INTERVAL 1200 MINUTE)),
   (1034, 'f395c3b412da998e382a2c0732771398392212580d03556c0e65e3cdec4cef5b', NULL, DATE_SUB(NOW(), INTERVAL 1200 MINUTE)),
   (1034, '27b7a21e76be48306a933776f493509135cefda9055517a7df8be5b35c73c2d7', NULL, DATE_SUB(NOW(), INTERVAL 1200 MINUTE));
+<<<<<<< HEAD
 
 -- Contas da demonstração já nascem com o e-mail confirmado (os e-mails de exemplo não existem de verdade).
 UPDATE usuarios SET email_confirmado_em = NOW() WHERE email_confirmado_em IS NULL;
+=======
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373

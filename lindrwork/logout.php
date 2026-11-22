@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require __DIR__ . '/config/database.php';
+=======
+require __DIR__.'/config/database.php';
+>>>>>>> 56925097664ae51b0b11dd31b29189b4488ae373
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     check_csrf();
     $_SESSION = [];
